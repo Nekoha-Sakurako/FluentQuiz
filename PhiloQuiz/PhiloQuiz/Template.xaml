@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--这是一个标准作答系统的模板，你可以根据需求修改标题等内容-->
+<Page
+    x:Class="PhiloQuiz.BlankPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PhiloQuiz"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Padding="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" HorizontalAlignment="Center" Margin="0,0,0,10">
+            <TextBlock FontSize="24" FontWeight="SemiBold">xxx复习题答题系统</TextBlock>
+            <TextBlock FontSize="14" Foreground="Gray">基于xxx复习题，完成后可查看成绩和错题解析</TextBlock>
+        </StackPanel>
+
+        <!-- Mode selector -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="0,0,0,10">
+            <ToggleButton x:Name="Mode1Button" Content="顺序作答" Checked="ModeButton_Checked" Unchecked="ModeButton_Unchecked" Width="180"/>
+            <ToggleButton x:Name="Mode2Button" Content="随机作答" Checked="ModeButton_Checked" Unchecked="ModeButton_Unchecked" Width="180"/>
+        </StackPanel>
+
+        <!-- Progress and Questions -->
+        <StackPanel Grid.Row="2">
+            <ProgressBar x:Name="QuizProgress" Minimum="0" Maximum="100" Height="8" Value="0" Margin="0,0,0,12"/>
+            <ScrollView x:Name="QuestionScrollViewer" VerticalScrollBarVisibility="Auto" Height="550">
+                <StackPanel x:Name="QuestionsContainer" Spacing="12"/>
+            </ScrollView>
+        </StackPanel>
+
+        <!-- Controls -->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="12" Margin="0,12,0,12">
+            <Button x:Name="SubmitButton" Content="提交答案" Click="SubmitButton_Click" Width="120"/>
+            <Button x:Name="ResetButton" Content="重置答案" Click="ResetButton_Click" Width="120"/>
+        </StackPanel>
+
+        <!-- Result -->
+        <Border Grid.Row="4" x:Name="ResultBorder" CornerRadius="8" Padding="12" Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}" Visibility="Collapsed" BorderBrush="#DDD" BorderThickness="1">
+            <StackPanel>
+                <TextBlock FontSize="18" FontWeight="SemiBold">答题结果</TextBlock>
+                <TextBlock Margin="0,6,0,0">得分: <Run x:Name="ScoreValueText">0</Run> 分</TextBlock>
+                <TextBlock x:Name="ResultMessageText" Margin="0,6,0,6"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="8" Margin="0,6,0,6">
+                    <ToggleButton x:Name="FilterAllButton" Content="显示所有题目" IsChecked="True" Checked="FilterButton_Checked" Unchecked="FilterButton_Unchecked" Width="140"/>
+                    <ToggleButton x:Name="FilterIncorrectButton" Content="只显示错题" Checked="FilterButton_Checked" Unchecked="FilterButton_Unchecked" Width="120"/>
+                </StackPanel>
+                <ListView x:Name="AnswerListView" MaxHeight="260"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>
